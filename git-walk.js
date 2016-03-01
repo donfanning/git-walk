@@ -10,30 +10,37 @@ var spawn = require('child_process').spawn;
 
 // May need graceful-fs, might even need graceful-exec...
 
+var $0 = path.basename(process.argv[1]);
+var HELP = fs.readFileSync(require.resolve('./help.txt'), 'utf-8')
+  .replace(/%MAIN%/g, $0);
 var parser = new Parser([
-  ':v(verbose)',
+  ':',
+  'h(help)',
+  'v(verbose)',
   'q(quiet)',
-  'w:(walk)',
+  'w:(where)',
   '1(serial)',
-  'n(parallel)',
-  'c:(concurrency)',
+  'p(parallel)',
+  'n:(concurrency)',
 ].join(''), process.argv);
 
 var option;
 var verbose = 1;
 var where = process.cwd();
-var concurrency = 1;
+var concurrency = 20;
 
 while ((option = parser.getopt()) !== undefined) {
   switch (option.option) {
+    case 'h': return console.log('%s', HELP);
     case 'v': verbose += 1; break;
     case 'q': verbose = 0; break;
     case 'w': where = option.optarg; break;
     case '1': concurrency = 1; break;
-    case 'n': concurrency = 20; break;
-    case 'c': concurrency = Number(option.optarg) || concurrency; break;
+    case 'p': concurrency = 20; break;
+    case 'n': concurrency = Number(option.optarg) || concurrency; break;
     default:
-      console.error('Invalid usage (near options \'%s\')', options.optopt);
+      console.error('Invalid usage (near options \'%s\'), try \'%s --help\'',
+                    option.optopt, $0);
       process.exit(1);
   }
 }
