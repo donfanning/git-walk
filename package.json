@@ -1,0 +1,14 @@
+{
+  "name": "git-walk",
+  "version": "0.1.0",
+  "description": "walk a directory tree, executing command in every git repo",
+  "author": "Sam Roberts <vieuxtech@gmail.com>",
+  "bin": {
+    "git-walk": "./git-walk.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "posix-getopt": "^1.2.0"
+  }
+}
