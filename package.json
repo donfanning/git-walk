@@ -1,6 +1,6 @@
 {
   "name": "git-walk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "walk a directory tree, executing command in every git repo",
   "author": "Sam Roberts <vieuxtech@gmail.com>",
   "bin": {
