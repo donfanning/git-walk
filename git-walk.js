@@ -132,7 +132,7 @@ function execute(where, done) {
   function onExit(code, signal) {
     if (code === 0) return done();
 
-    console.error('cmd `%s` failed with %s', cmd, signal || code);
+    console.error('cd %s: `%s` failed with %s', where, cmd, signal || code);
 
     if (signal)
       process.kill(process.pid, err.signal);
